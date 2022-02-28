@@ -62,6 +62,8 @@ for i in original_list:
 # which contains only the positive numbers from the list, as integers.
 
 numbers = [34.6, -203.4, 44.9, 68.3, -12.2, 44.6, 12.7]
+newlist = [int(i) for i in numbers if i > 0]
+print(newlist)
 
 
 
@@ -73,6 +75,9 @@ sentence = "the quick brown fox jumps over the lazy dog"
 words = sentence.split()
 
 
+length = [len(i) for i in words if i != 'the']
+print(length)
+
 
 ## Given dictionary is consisted of vehicles and their weights in kilograms. 
 ## Contruct a list of the names of vehicles with weight below 5000 kilograms. 
@@ -80,3 +85,6 @@ words = sentence.split()
 
 dict={"Sedan": 1500, "SUV": 2000, "Pickup": 2500, "Minivan": 1600, "Van": 2400, 
 "Semi": 13600, "Bicycle": 7, "Motorcycle": 110}
+
+names = [key.upper() for key in dict if dict[key] < 5000]
+print(names)
