@@ -111,11 +111,12 @@ enroll, lons, lats, hover_text = [],[],[],[]
 
 for record in list_of_univ:
     if record['NCAA']['NAIA conference number football (IC2020)'] in list_of_sel_univ:
-        if record["Total price for in-state students living off campus (not with family)  2020-21 (DRVIC2020)"] > 50000:
-            enroll.append(record['Total  enrollment (DRVEF2020)'])
-            lons.append(record['Longitude location of institution (HD2020)'])
-            lats.append(record['Latitude location of institution (HD2020)'])
-            hover_text.append([record['instnm'],str(record['Total price for in-state students living off campus (not with family)  2020-21 (DRVIC2020)'])+'%'])
+        if record["Total price for in-state students living off campus (not with family)  2020-21 (DRVIC2020)"] != None:
+            if record["Total price for in-state students living off campus (not with family)  2020-21 (DRVIC2020)"] > 50000:
+                enroll.append(record['Total  enrollment (DRVEF2020)'])
+                lons.append(record['Longitude location of institution (HD2020)'])
+                lats.append(record['Latitude location of institution (HD2020)'])
+                hover_text.append([record['instnm'],'$'+str(record['Total price for in-state students living off campus (not with family)  2020-21 (DRVIC2020)'])])
 
 
 
