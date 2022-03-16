@@ -13,7 +13,7 @@ Map 3) Total price for in-state students living off campus over $50,000
 
 """
 import json
-import csv
+
 
 infile = open('univ.json','r')
 outfile = open('readable_univ_data.json','w')
@@ -33,20 +33,20 @@ list_of_sel_univ = [102,108,107,127,130]
 
 print(len(list_of_univ))
 
-size, lons, lats, hover_text = [],[],[],[]
+enroll, lons, lats, hover_text = [],[],[],[]
 
 
-for eq in list_of_univ:
-    if eq['NCAA']['NAIA conference number football (IC2020)'] in list_of_sel_univ:
-        if eq['Graduation rate  women (DRVGR2020)'] > 50:
-            size.append(eq['Total  enrollment (DRVEF2020)'])
-            lons.append(eq['Longitude location of institution (HD2020)'])
-            lats.append(eq['Latitude location of institution (HD2020)'])
-            hover_text.append([eq['instnm'],eq['Graduation rate  women (DRVGR2020)']])
+for record in list_of_univ:
+    if record['NCAA']['NAIA conference number football (IC2020)'] in list_of_sel_univ:
+        if record['Graduation rate  women (DRVGR2020)'] > 50:
+            enroll.append(record['Total  enrollment (DRVEF2020)'])
+            lons.append(record['Longitude location of institution (HD2020)'])
+            lats.append(record['Latitude location of institution (HD2020)'])
+            hover_text.append([record['instnm'],str(record['Graduation rate  women (DRVGR2020)'])+'%'])
 
 
 
-print(size[:10]) #printing out the first 10 in the list
+print(enroll[:10]) #printing out the first 10 in the list
 print(lons[:10])
 print(lats[:10]) 
 
@@ -60,11 +60,11 @@ data = [
     'lat': lats,
     'text': hover_text,
     'marker': {
-        'size': [5*size for size in size], #just spaces in between
-        #'color':mags,
-        #'colorscale': 'Viridis',
-        #'reversescale':True,
-        #'colorbar': {'title': 'Magnitude'}
+        'size': [0.001*size for size in enroll], #just spaces in between
+        'color':enroll,
+        'colorscale': 'Viridis',
+        'reversescale':True,
+        'colorbar': {'title': 'Enrollment'}
     },
     }]
 
@@ -72,5 +72,4 @@ my_layout = Layout(title='Global Earthquakes')
 
 fig = {'data':data,'layout':my_layout}
 
-offline.plot(fig,filename='globalearthquakes.html')
-'''
+offline.plot(fig,filename='FemaleGradRate.html')
